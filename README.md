@@ -1,33 +1,34 @@
-# @vbcherepanov/total-agent-memory-client
+# @vbch/total-agent-memory-client
 
-[![npm](https://img.shields.io/npm/v/@vbcherepanov/total-agent-memory-client.svg)](https://www.npmjs.com/package/@vbcherepanov/total-agent-memory-client)
+[![npm](https://img.shields.io/npm/v/@vbch/total-agent-memory-client.svg)](https://www.npmjs.com/package/@vbch/total-agent-memory-client)
 [![license](https://img.shields.io/badge/license-MIT-fa4.svg)](LICENSE)
+[![Donate](https://img.shields.io/badge/PayPal-Donate-00457C.svg?logo=paypal&logoColor=white)](https://www.paypal.com/donate/?business=vbcherepanov%40gmail.com&currency_code=USD&item_name=total-agent-memory)
 
-TypeScript / JavaScript client for [**total-agent-memory**](https://github.com/vbcherepanov/claude-total-memory) —
+TypeScript / JavaScript client for [**total-agent-memory**](https://github.com/vbcherepanov/total-agent-memory) —
 the local-first MCP memory layer for AI coding agents.
 
 > **Why use this?** If you're building in Node.js, Bun, Deno, or browsers and you want persistent,
 > graph-aware memory that *learns how you work*, not just what you said — this is your client.
 > 100% local by default. Temporal facts. Procedural workflows. Cross-project analogy.
-> See the engine [feature matrix vs mem0 / Letta / Zep / Supermemory](https://github.com/vbcherepanov/claude-total-memory/blob/main/docs/vs-competitors.md).
+> See the engine [feature matrix vs mem0 / Letta / Zep / Supermemory](https://github.com/vbcherepanov/total-agent-memory/blob/main/docs/vs-competitors.md).
 
 ## Install
 
 ```bash
-npm i @vbcherepanov/total-agent-memory-client
+npm i @vbch/total-agent-memory-client
 # peerless — bundles @modelcontextprotocol/sdk
 ```
 
 You also need the server running. One-line install:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/vbcherepanov/claude-total-memory/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/vbcherepanov/total-agent-memory/main/install.sh | bash
 ```
 
 ## Quick start (stdio — local MCP subprocess)
 
 ```ts
-import { connectStdio } from "@vbcherepanov/total-agent-memory-client";
+import { connectStdio } from "@vbch/total-agent-memory-client";
 
 const memory = await connectStdio();
 
@@ -56,7 +57,7 @@ const hits = await memory.recallFlat({
 Works against the dashboard HTTP gateway (total-agent-memory v7.1+):
 
 ```ts
-import { connectHttp } from "@vbcherepanov/total-agent-memory-client";
+import { connectHttp } from "@vbch/total-agent-memory-client";
 
 const memory = connectHttp({
   baseUrl: "http://127.0.0.1:37737",

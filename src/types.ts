@@ -1,5 +1,5 @@
 /**
- * Public types for @vbcherepanov/total-agent-memory-client
+ * Public types for @vbch/total-agent-memory-client
  * Mirrors the MCP tool surface of total-agent-memory v7.x.
  */
 

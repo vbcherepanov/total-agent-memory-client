@@ -1,6 +1,6 @@
 {
-  "name": "@vbcherepanov/total-agent-memory-client",
-  "version": "0.1.0",
+  "name": "@vbch/total-agent-memory-client",
+  "version": "0.1.1",
   "description": "TypeScript client for total-agent-memory — local-first MCP memory layer for AI coding agents",
   "keywords": [
     "mcp",
@@ -24,6 +24,12 @@
   },
   "license": "MIT",
   "author": "Vitalii Cherepanov",
+  "funding": [
+    {
+      "type": "paypal",
+      "url": "https://www.paypal.com/donate/?business=vbcherepanov%40gmail.com&currency_code=USD&item_name=total-agent-memory"
+    }
+  ],
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

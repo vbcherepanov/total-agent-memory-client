@@ -36,7 +36,7 @@ export async function connectStdio(
 
   const client = new Client(
     {
-      name: options.clientName ?? "@vbcherepanov/total-agent-memory-client",
+      name: options.clientName ?? "@vbch/total-agent-memory-client",
       version: options.clientVersion ?? "0.1.0",
     },
     {

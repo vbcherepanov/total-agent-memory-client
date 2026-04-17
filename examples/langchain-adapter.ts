@@ -1,5 +1,5 @@
 /**
- * Minimal LangChain JS memory adapter wrapping @vbcherepanov/total-agent-memory-client.
+ * Minimal LangChain JS memory adapter wrapping @vbch/total-agent-memory-client.
  *
  * Shows the pattern — adapt to your BaseMemory / BaseChatMemory implementation.
  */
