@@ -1,0 +1,81 @@
+{
+  "name": "@vbcherepanov/total-agent-memory-client",
+  "version": "0.1.0",
+  "description": "TypeScript client for total-agent-memory — local-first MCP memory layer for AI coding agents",
+  "keywords": [
+    "mcp",
+    "memory",
+    "ai-agent",
+    "claude",
+    "knowledge-graph",
+    "langgraph",
+    "llamaindex",
+    "crewai",
+    "local-first",
+    "rag"
+  ],
+  "homepage": "https://github.com/vbcherepanov/total-agent-memory",
+  "bugs": {
+    "url": "https://github.com/vbcherepanov/total-agent-memory/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vbcherepanov/total-agent-memory-client.git"
+  },
+  "license": "MIT",
+  "author": "Vitalii Cherepanov",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./stdio": {
+      "types": "./dist/stdio.d.ts",
+      "import": "./dist/stdio.js",
+      "require": "./dist/stdio.cjs"
+    },
+    "./http": {
+      "types": "./dist/http.d.ts",
+      "import": "./dist/http.js",
+      "require": "./dist/http.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts src/stdio.ts src/http.ts --format esm,cjs --dts --clean",
+    "dev": "tsup src/index.ts src/stdio.ts src/http.ts --format esm,cjs --dts --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "example:stdio": "tsx examples/stdio-basic.ts",
+    "example:http": "tsx examples/http-basic.ts",
+    "prepublishOnly": "npm run typecheck && npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "eslint": "^9.0.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
