@@ -1,7 +1,7 @@
 {
   "name": "@vbch/total-agent-memory-client",
-  "version": "0.1.1",
-  "description": "TypeScript client for total-agent-memory — local-first MCP memory layer for AI coding agents",
+  "version": "0.2.0",
+  "description": "TypeScript client for total-agent-memory (server v8.0+) — local-first MCP memory layer for AI coding agents",
   "keywords": [
     "mcp",
     "memory",
@@ -27,7 +27,7 @@
   "funding": [
     {
       "type": "paypal",
-      "url": "https://www.paypal.com/donate/?business=vbcherepanov%40gmail.com&currency_code=USD&item_name=total-agent-memory"
+      "url": "https://PayPal.Me/vbcherepanov"
     }
   ],
   "type": "module",
@@ -68,6 +68,9 @@
     "typecheck": "tsc --noEmit",
     "example:stdio": "tsx examples/stdio-basic.ts",
     "example:http": "tsx examples/http-basic.ts",
+    "example:task-workflow": "tsx examples/task-workflow.ts",
+    "example:progressive-disclosure": "tsx examples/progressive-disclosure.ts",
+    "example:cloud-providers": "tsx examples/cloud-providers.ts",
     "prepublishOnly": "npm run typecheck && npm run build"
   },
   "dependencies": {

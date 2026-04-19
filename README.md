@@ -2,10 +2,12 @@
 
 [![npm](https://img.shields.io/npm/v/@vbch/total-agent-memory-client.svg)](https://www.npmjs.com/package/@vbch/total-agent-memory-client)
 [![license](https://img.shields.io/badge/license-MIT-fa4.svg)](LICENSE)
-[![Donate](https://img.shields.io/badge/PayPal-Donate-00457C.svg?logo=paypal&logoColor=white)](https://www.paypal.com/donate/?business=vbcherepanov%40gmail.com&currency_code=USD&item_name=total-agent-memory)
+[![Donate](https://img.shields.io/badge/PayPal-Donate-00457C.svg?logo=paypal&logoColor=white)](https://PayPal.Me/vbcherepanov)
 
 TypeScript / JavaScript client for [**total-agent-memory**](https://github.com/vbcherepanov/total-agent-memory) —
 the local-first MCP memory layer for AI coding agents.
+
+> **New in 0.2.0** (server **v8.0+** required): structured decisions with per-criterion scoring, an L1-L4 task state machine (`classifyTask` / `taskCreate` / `phaseTransition`), progressive-disclosure retrieval (`mode: "index"` + `memoryGet`) that cuts typical recall tokens by 80-90%, intent capture, phase-scoped rules, LLM-compressed `sessionEnd`, and inline `<private>…</private>` redaction reporting.
 
 > **Why use this?** If you're building in Node.js, Bun, Deno, or browsers and you want persistent,
 > graph-aware memory that *learns how you work*, not just what you said — this is your client.
@@ -101,6 +103,33 @@ console.log(stats.knowledge.active, "records across", Object.keys(stats.by_proje
 - `workflowPredict(task_description)` — procedural prediction with confidence
 - `workflowTrack(workflow_id, outcome)` — close the loop after task completion
 - `ingestCodebase({ path, languages? })` — AST indexing via tree-sitter (9 langs)
+
+### v8 tools (requires server 8.0+)
+- `classifyTask(description, project?)` — L1-L4 classifier, returns suggested phases + confidence
+- `taskCreate(taskId, description, level?)` — open a task in the state machine
+- `phaseTransition(taskId, newPhase, artifacts?, notes?)` — step through `van` → `plan` → `creative` → `build` → `reflect` → `archive`
+- `taskPhasesList(taskId)` — full phase timeline for a task
+- `saveDecision({ title, options, criteria_matrix, selected, rationale })` — structured decisions with per-criterion scoring, indexed for recall
+- `memoryRecall({ mode: "index" })` + `memoryGet(ids, detail?)` — **progressive-disclosure retrieval**: cheap index scan → targeted fetch. ~80-90% token savings on typical 20-hit queries vs. `mode: "search", detail: "full"`.
+- `saveIntent` / `listIntents` / `searchIntents` — captured user prompts
+- `ruleSetPhase(ruleId, phase)` — scope a rule to a task phase (or `null` for global)
+- Extended `sessionEnd({ auto_compress, transcript })` — LLM-generated summary/next-steps from a raw transcript
+- Extended `MemorySaveResult.privacy_redacted_sections` — count of inline `<private>…</private>` sections stripped before storage
+
+### Progressive disclosure in practice
+
+```ts
+// Layer 1: cheap index scan (id + title + preview per hit, ~50 tokens each)
+const idx = await memory.memoryRecall({
+  query: "database choice",
+  mode: "index",
+  limit: 20,
+});
+
+// Layer 2: agent picks what's worth the full body
+const keepIds = (idx.index_results ?? []).slice(0, 3).map((r) => r.id);
+const full = await memory.memoryGet(keepIds, "full");
+```
 
 ### Introspection
 - `stats()` — active knowledge, projects, storage, queues
